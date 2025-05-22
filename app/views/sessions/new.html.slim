@@ -1,0 +1,29 @@
+.row.justify-content-center
+  .col-md-6.col-lg-4
+    .card.mt-5
+      .card-header.text-center
+        h2.h4.mb-0 収穫管理システム
+      .card-body
+        h3.h5.mb-3.text-center ログイン
+
+        - if flash[:notice]
+          .alert.alert-success.mb-3
+            = flash[:notice]
+        
+        = form_with(url: login_path, local: true) do |f|
+          - if flash[:alert]
+            .alert.alert-danger.mb-3
+              = flash[:alert]
+
+          div
+            = f.label :username, 'ユーザー名'
+            .mb-3
+              = f.text_field :username, class: 'form-control', required: true
+
+          div
+            = f.label :password, 'パスワード'
+            .mb-3
+              = f.password_field :password, class: 'form-control', required: true
+
+          .d-grid.mt-4
+            = f.submit 'ログイン', class: 'btn btn-primary'

@@ -1,0 +1,18 @@
+.row.justify-content-center
+  .col-md-6
+    .card
+      .card-header
+        h2.h4.mb-0 収穫量編集
+      .card-body
+        = form_with(model: @harvest, local: true) do |f|
+          .mb-3
+            = f.label :date, '収穫日', class: 'form-label'
+            = f.date_field :date, class: 'form-control'
+
+          .mb-3
+            = f.label :amount, '収穫量 (kg)', class: 'form-label'
+            = f.number_field :amount, step: 0.1, class: 'form-control'
+
+          .d-flex
+            = f.submit '更新', class: 'btn btn-primary', style: 'margin-right: 8px;'
+            = link_to 'キャンセル', harvests_path, class: 'btn btn-secondary' 

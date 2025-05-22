@@ -1,0 +1,23 @@
+h2.mb-4 ユーザー一覧
+
+.container.px-3
+  = link_to '新規登録', new_user_path, class: 'btn btn-outline-dark mb-4', style: 'width: 200px;'
+
+  table.table.table-bordered.align-middle
+    thead
+      tr
+        th.p-3.fs-5 style="min-width: 140px;" ユーザー名
+        th.p-3.fs-5 style="min-width: 140px;" 管理者権限
+        th.p-3.fs-5 style="width: 160px;"
+    tbody style="line-height: 1.8;"
+      - @users.each do |user|
+        tr
+          td.p-3 = user.username
+          td.p-3 = user.is_admin? ? '有り' : '無し'
+          td.p-3.text-nowrap
+            = link_to '編集', edit_user_path(user), class: 'btn btn-outline-dark btn-sm'
+            span style="display: inline-block; width: 8px;"
+            = button_to '削除', user_path(user), 
+                method: :delete,
+                form: { data: { turbo_confirm: '本当に削除しますか？' }, style: 'display: inline-block;' },
+                class: 'btn btn-outline-dark btn-sm'

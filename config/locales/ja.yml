@@ -1,0 +1,32 @@
+ja:
+  activerecord:
+    models:
+      user: ユーザー
+      harvest: 収穫
+    attributes:
+      user:
+        username: ユーザー名
+        password: パスワード
+        password_confirmation: パスワード（確認）
+        is_admin: 管理者権限
+      harvest:
+        date: 収穫日
+        amount: 収穫量
+    errors:
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: と%{attribute}が一致しません
+            password:
+              blank: を入力してください
+            username:
+              blank: を入力してください
+              taken: はすでに使用されています
+        harvest:
+          attributes:
+            date:
+              blank: を入力してください
+            amount:
+              blank: を入力してください
+              greater_than: は0より大きい値にしてください 

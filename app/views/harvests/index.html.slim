@@ -1,0 +1,27 @@
+h2.mb-4 収穫量一覧
+
+.container.px-3
+  = link_to '新規登録', new_harvest_path, class: 'btn btn-outline-dark mb-4', style: 'width: 200px;'
+
+  table.table.table-bordered.align-middle
+    thead
+      tr
+        th.p-3.fs-5 style="min-width: 140px;" 収穫日
+        th.p-3.fs-5 style="min-width: 140px;" ユーザー名
+        th.p-3.fs-5 style="min-width: 140px;" 収穫量 (kg)
+        - if current_user.is_admin?
+          th.p-3.fs-5 style="width: 160px;"
+    tbody style="line-height: 1.8;"
+      - @harvests.each do |harvest|
+        tr
+          td.p-3 = harvest.date.strftime('%Y/%m/%d')
+          td.p-3 = harvest.user.username
+          td.p-3 = number_with_precision(harvest.amount, precision: 1)
+          - if current_user.is_admin?
+            td.p-3.text-nowrap
+              = link_to '編集', edit_harvest_path(harvest), class: 'btn btn-outline-dark btn-sm'
+              span style="display: inline-block; width: 8px;"
+              = button_to '削除', harvest_path(harvest), 
+                  method: :delete,
+                  form: { data: { turbo_confirm: '本当に削除しますか？' }, style: 'display: inline-block;' },
+                  class: 'btn btn-outline-dark btn-sm'
