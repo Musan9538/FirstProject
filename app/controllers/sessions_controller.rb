@@ -1,4 +1,7 @@
 class SessionsController < ApplicationController
+  def new
+  end
+
   def create
     if params[:username].blank? || params[:password].blank?
       flash.now[:alert] = '※ユーザー名とパスワードを入力してください'

@@ -3,6 +3,6 @@ class User < ApplicationRecord
   has_many :harvests, dependent: :destroy
   
   validates :username, presence: true, uniqueness: true
-  validates :password, presence: true, on: :create
+  validates :password, presence: true, length: { minimum: 8 }, on: :create
 end
  

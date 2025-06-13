@@ -1,0 +1,13 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS (and SCSS, if configured) file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file. Optionally, you can also load any individual CSS, SCSS, or SASS files using a
+ * separate file, per directory, or specify a glob (e.g. *.scss) that'll be compiled together.
+ *
+ * @import "bootstrap";
+ */ 

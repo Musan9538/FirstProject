@@ -1,17 +1,16 @@
 class HarvestsController < ApplicationController
   before_action :require_user
-  before_action :set_harvest, only: [:destroy]
+  before_action :set_harvest, only: [:edit, :destroy]
   
   def index
-    @harvests = if current_user.is_admin?
-      Harvest.all.order(date: :desc)
-    else
-      current_user.harvests.order(date: :desc)
-    end
+    @harvests = Harvest.accessible_by(current_user).order(date: :desc)
   end
 
   def new
     @harvest = Harvest.new
+  end
+
+  def edit
   end
 
   def create
@@ -37,11 +36,7 @@ class HarvestsController < ApplicationController
   private
 
   def set_harvest
-    @harvest = if current_user.is_admin?
-      Harvest.find(params[:id])
-    else
-      current_user.harvests.find(params[:id])
-    end
+    @harvest = Harvest.accessible_by(current_user).find(params[:id])
   end
 
   def harvest_params

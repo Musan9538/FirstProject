@@ -22,7 +22,6 @@ class UsersController < ApplicationController
   end
   
   def update
-    # パスワードが空の場合はパスワード関連のパラメータを削除
     if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
       params[:user].delete(:password)
       params[:user].delete(:password_confirmation)
@@ -38,7 +37,12 @@ class UsersController < ApplicationController
   end
 
   def destroy
-    if @user != current_user && @user.destroy
+    if @user == current_user
+      flash[:alert] = "自分のアカウントを削除することはできません"
+      redirect_to users_path and return
+    end
+
+    if @user.destroy
       flash[:notice] = "ユーザーを削除しました"
     else
       flash[:alert] = "ユーザーの削除に失敗しました"

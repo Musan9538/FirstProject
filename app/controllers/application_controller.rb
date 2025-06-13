@@ -15,14 +15,19 @@ class ApplicationController < ActionController::Base
   def require_user
     unless logged_in?
       flash[:alert] = "ログインが必要です"
-      redirect_to login_path
+      redirect_to login_path and return
     end
   end
 
   def require_admin
-    unless logged_in? && current_user.is_admin?
+    unless logged_in?
+      flash[:alert] = "ログインが必要です"
+      redirect_to login_path and return
+    end
+
+    unless current_user.is_admin?
       flash[:alert] = "管理者権限が必要です"
-      redirect_to root_path
+      redirect_to root_path and return
     end
   end
 end
